@@ -1,10 +1,3 @@
-import groovy.io.FileType;
-import java.io.File;
-import java.util.Calendar.*;
-import java.text.SimpleDateFormat
-import hudson.model.*
-
-@NonCPS
 def call(Map config=[:]) {
 	node {
 		stage('SCM') {
@@ -15,7 +8,7 @@ def call(Map config=[:]) {
 			try {
 				echo 'Building....'
 				bat 'gradle clean build'
-				releasenotes()
+				releasenotes(changes:"true")
 			} catch(ex) {
 				echo 'Something went wrong'
 				echo ex.toString()
